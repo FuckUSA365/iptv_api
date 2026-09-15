@@ -160,9 +160,48 @@ epg_urls = [
     "https://epg.pw/xmltv/epg_TW.xml"
 ]
 # 测速超时时间（秒）
-TEST_TIMEOUT = 5
+TEST_TIMEOUT = 3.5
 
 # 测速线程池最大工作线程数
 MAX_WORKERS = 10
 # 单个频道单协议（IPv4/IPv6）最多保留的线路数量
 MAX_CHANNEL_SOURCES = 3
+# ── 质量检测 — HTTP 快筛 ─────────────────────────────────────────────
+# enable_quality_check : True=启用质量检测（测活后过滤失效源），False=直接输出不过滤
+# check_timeout        : 单个 URL HTTP 请求超时时间（秒），超时视为失效
+# check_max_conn       : 最大并发检测数，调高可加速但更占带宽
+enable_quality_check = True
+check_timeout    = 3.5
+check_max_conn   = 10
+
+# ── 质量检测 — FFprobe 中度探测 ───────────────────────────────────────
+# enable_ffprobe     : True=启用第二层 FFprobe 探测，False=仅 HTTP 快筛
+#                      建议先在少量频道上测试稳定性，再全量开启
+# ffmpeg_path        : FFprobe 可执行文件路径
+#                      空字符串 = 使用系统 PATH 里的 ffprobe
+#                      Windows 如不在 PATH 中，填绝对路径即可
+# ffprobe_timeout    : 单个 URL FFprobe 探流超时（秒）
+#                      IPTV 流通常 1~3 秒即可探完，设为 8 秒以容忍慢源
+# min_bitrate        : 最低码率阈值（bps），低于此值且 ffprobe 能读到码率时被过滤
+#                      设为 0 = 不限制码率（IPTV 流常读不到码率字段，此时代偿跳过检查）
+# min_resolution     : 最低分辨率宽度要求（字符串，如 "720" 表示宽 >= 720px）
+#                      设为空字符串 "" = 不限制分辨率
+# ffprobe_max_streams: ffprobe 最多读取的流数量，避免大文件探流耗时过长
+ffmpeg_path        = ""        # 空 = 使用系统 PATH 里的 ffprobe
+enable_ffprobe     = True
+ffprobe_timeout    = 3.5
+min_bitrate        = 200000         # min_bitrate = 200000 → 码率>0 且 <200kbps 的源会被淘汰；码率=0 的源不受影响
+min_resolution     = "1080"     # 宽度最低 1080px
+ffprobe_max_streams = 3
+
+# ── 深度探测配置 ───────────────────────────────────────────────────────
+# enable_deep_probe  : True=启用第三层深度探测（仅对 m3u8 流），False=仅中度探测
+#                      深度探测会检查分片时长、数量等，更准确但更慢
+# deep_probe_timeout : 单个 URL 深度探测超时（秒）
+#                      IPTV 流通常 5~10 秒即可探完，设为 10 秒以容忍慢源
+# min_speed_kbps     : 最小速度阈值（kbps），低于此值的源会被过滤
+#                      0 = 不过滤（只评分不淘汰）
+#                      建议 2000（2 Mbps）避免推流卡顿
+enable_deep_probe  = False
+deep_probe_timeout = 5.0
+min_speed_kbps     = 2500  # 2.5 Mbps
