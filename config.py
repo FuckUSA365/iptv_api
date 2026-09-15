@@ -9,7 +9,7 @@ source_urls = [
 "https://live.zbds.org/tv/iptv6.m3u",
 "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u",
 "https://zbds.org/tv/iptv4.m3u",
-
+"https://www.kaniptv.cc.cd",
 "https://raw.githubusercontent.com/fafa002/yf2025/refs/heads/main/yiyifafa.txt",
 "https://raw.githubusercontent.com/zxmlxw520/5566/refs/heads/main/cjdszb.txt",
 "https://raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u",
