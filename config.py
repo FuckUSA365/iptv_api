@@ -5,11 +5,11 @@ ip_version_priority = "ipv4"
 
 # 直播源URL列表
 source_urls = [
-"https://m3u.ibert.me/fmml_ipv6.m3u",
+"https://www.kaniptv.cc.cd",
+    "https://m3u.ibert.me/fmml_ipv6.m3u",
 "https://live.zbds.org/tv/iptv6.m3u",
 "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u",
 "https://zbds.org/tv/iptv4.m3u",
-"https://www.kaniptv.cc.cd",
 "https://raw.githubusercontent.com/fafa002/yf2025/refs/heads/main/yiyifafa.txt",
 "https://raw.githubusercontent.com/zxmlxw520/5566/refs/heads/main/cjdszb.txt",
 "https://raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u",
@@ -191,7 +191,7 @@ ffmpeg_path        = ""        # 空 = 使用系统 PATH 里的 ffprobe
 enable_ffprobe     = True
 ffprobe_timeout    = 3.5
 min_bitrate        = 200000         # min_bitrate = 200000 → 码率>0 且 <200kbps 的源会被淘汰；码率=0 的源不受影响
-min_resolution     = "1080"     # 宽度最低 1080px
+min_resolution     = "1920"     # 宽度最低 1920px
 ffprobe_max_streams = 3
 
 # ── 深度探测配置 ───────────────────────────────────────────────────────
